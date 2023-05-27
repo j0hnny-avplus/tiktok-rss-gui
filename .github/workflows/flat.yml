@@ -4,6 +4,15 @@ on:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      URL:
+        description: 'your github repo URL'
+        type: enviroment
+        required: true
+      usernames:
+        description: 'TikTok usernames you like to rss,if you want more than one ,pls edit subscriptions.csv'
+        type: enviroment
+        required: true  
   schedule:
     - cron: '10 * * * *'
 jobs:
@@ -24,3 +33,6 @@ jobs:
           http_url: https://conoroneill.com/index.xml
           downloaded_filename: conor_rss.xml
           postprocess: postprocess.ts
+        env:
+          URL: ${{ github.event.inputs.URL }}        
+          usernames: ${{ github.event.inputs.usernames }}        
