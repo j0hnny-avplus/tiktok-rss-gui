@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       URL:
-        description: 'your github repo URL'
+        description: 'your github repo URL,like https://conoro.github.io/tiktok-rss-flat/'
         type: enviroment
         required: true
       usernames:
