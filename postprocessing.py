@@ -10,16 +10,25 @@ from tiktokapipy.async_api import AsyncTikTokAPI
 # ghPagesURL = "https://conoro.github.io/tiktok-rss-flat/"
 
 # Custom Domain
-ghPagesURL = "https://tiktokrss.conoroneill.com/"
+# ghPagesURL = "https://tiktokrss.conoroneill.com/"
 
 maxItems = 5
 
+ghPagesURL = os.getenv('URL')
+usernames = os.getenv('usernames')
+
+if ghPagesURL is None:
+    ghPagesURL="https://open-tiktoka.github.io/tiktok-rss-gui"
+
 
 async def runAll():
-    with open('subscriptions.csv') as f:
-        # TODO: Switch to 3.11 TaskGroup or trio nursery
-        await asyncio.gather(*[
-            run(row['username']) for row in csv.DictReader(f, fieldnames=['username'])])
+    if usernames is not None:
+        run(usernames)
+    else:
+        with open('subscriptions.csv') as f:
+            # TODO: Switch to 3.11 TaskGroup or trio nursery
+            await asyncio.gather(*[
+                run(row['username']) for row in csv.DictReader(f, fieldnames=['username'])])
 
 
 async def run(csvuser):
