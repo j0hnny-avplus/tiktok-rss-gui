@@ -4,15 +4,7 @@ on:
     branches:
       - main
   workflow_dispatch:
-    inputs:
-      URL:
-        description: 'your github repo URL,like https://conoro.github.io/tiktok-rss-flat/'
-        type: enviroment
-        required: true
-      usernames:
-        description: 'TikTok usernames you like to rss,if you want more than one ,pls edit subscriptions.csv'
-        type: enviroment
-        required: true  
+
   schedule:
     - cron: '10 * * * *'
 jobs:
